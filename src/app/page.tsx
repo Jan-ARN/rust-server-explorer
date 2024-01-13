@@ -12,6 +12,7 @@ import {
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import store from "./rootStore";
+import ShowHeader from "./Components/header";
 
 store.loadData(3344761);
 
@@ -31,33 +32,36 @@ const Home: React.FC = observer(() => {
     store.removeId(id);
   };
   return (
-    <div>
-      <TextField
-        label="Enter ID"
-        variant="outlined"
-        value={inputValue}
-        onChange={handleInputChange}
-      />
-      <Button onClick={handleAddId}>Add ID</Button>
-      <List>
-        {store.ids.map((id) => (
-          <ListItem
-            key={id}
-            secondaryAction={
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => handleRemoveId(id)}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </IconButton>
-            }
-          >
-            <ListItemText primary={id} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
+    <>
+      <ShowHeader></ShowHeader>
+      <div>
+        <TextField
+          label="Enter ID"
+          variant="outlined"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        <Button onClick={handleAddId}>Add ID</Button>
+        <List>
+          {store.ids.map((id) => (
+            <ListItem
+              key={id}
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => handleRemoveId(id)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </IconButton>
+              }
+            >
+              <ListItemText primary={id} />
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    </>
   );
 });
 
